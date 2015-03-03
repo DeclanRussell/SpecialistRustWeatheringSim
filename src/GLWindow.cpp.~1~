@@ -1,0 +1,83 @@
+#include "GLWindow.h"
+#include <iostream>
+#include <QColorDialog>
+
+
+//----------------------------------------------------------------------------------------------------------------------
+GLWindow::GLWindow(const QGLFormat _format, QWidget *_parent ) : QGLWidget( _format, _parent )
+{
+
+  // set this widget to have the initial keyboard focus
+  setFocus();
+  // re-size the widget to that of the parent (in this case the GLFrame passed in on construction)
+  this->resize(_parent->size());
+
+}
+
+// This virtual function is called once before the first call to paintGL() or resizeGL(),
+//and then once whenever the widget has been assigned a new QGLContext.
+// This function should set up any required OpenGL context rendering flags, defining display lists, etc.
+
+//----------------------------------------------------------------------------------------------------------------------
+void GLWindow::initializeGL()
+{
+
+  glClearColor(0.4f, 0.4f, 0.4f, 1.0f);			   // Grey Background
+  // enable depth testing for drawing
+  glEnable(GL_DEPTH_TEST);
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//This virtual function is called whenever the widget has been resized.
+// The new size is passed in width and height.
+void GLWindow::resizeGL( int _w, int _h )
+{
+  glViewport(0,0,_w,_h);
+
+}
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------------
+//This virtual function is called whenever the widget needs to be painted.
+// this is our main drawing routine
+void GLWindow::paintGL()
+{
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+}
+
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------------
+void GLWindow::mouseMoveEvent ( QMouseEvent * _event )
+{
+  Q_UNUSED(_event);
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------
+void GLWindow::mousePressEvent (QMouseEvent * _event  )
+{
+  Q_UNUSED(_event);
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+void GLWindow::mouseReleaseEvent (  QMouseEvent * _event  )
+{
+  Q_UNUSED(_event);
+
+}
+
+
+GLWindow::~GLWindow()
+{
+}
+
+
+
